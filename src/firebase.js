@@ -16,6 +16,7 @@ import {
     where,
     addDoc
 } from "firebase/firestore";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 const config = {
     apiKey: "AIzaSyBy2WnDSVZ2Yjuw_DEJOlQhumC-A8bhWtI",
@@ -31,6 +32,7 @@ const config = {
 const app = initializeApp(config);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const analytics = getAnalytics(app);
 
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
@@ -44,6 +46,7 @@ const signInWithGoogle = async () => {
                 uid: user.uid,
                 name: user.displayName,
                 authProvider: "google",
+                isAdmin: false,
                 email: user.email,
             });
         }
@@ -70,6 +73,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
             uid: user.uid,
             name,
             authProvider: "local",
+            isAdmin: false,
             email,
         });
     } catch (err) {
@@ -93,9 +97,30 @@ const logout = () => {
     signOut(auth);
 };
 
+
+const logAnalyticsEvent = async (message = "default") =>
+{
+    try
+    {
+        await logEvent(analytics, message, {
+            content_type: 'text',
+            content_id: 'P12453',
+            items: [{ name: 'test' }]
+        });
+    }
+    catch (err)
+    {
+        console.log(err);
+        alert(err.message);
+    }
+}
+
 export {
     auth,
     db,
+    analytics,
+    getAnalytics,
+    logAnalyticsEvent,
     signInWithGoogle,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,

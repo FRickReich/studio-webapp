@@ -1,13 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import { 
-    Login, 
-    Register, 
-    Reset, 
+import {  
     Dashboard,
-    Home
-} from './Views';
+} from './Admin/Views';
+
+import { Home } from './Web/Views';
 
 function App() {
     return (
@@ -15,9 +13,6 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route exact path="/Login" element={<Login />} />
-                    <Route exact path="/register" element={<Register />} />
-                    <Route exact path="/reset" element={<Reset />} />
                     <Route exact path="/dashboard" element={<Dashboard />} />
                 </Routes>
             </Router>

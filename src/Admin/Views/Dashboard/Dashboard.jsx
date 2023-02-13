@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
-import { auth, db, logout } from "./../../firebase";
+import { auth, db, logout } from "./../../../firebase";
 
 import "./Dashboard.scss";
 
@@ -11,6 +11,7 @@ export const Dashboard = () =>
 {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
+    const [isAdmin, setIsAdmin ] = useState(false);
  
     const navigate = useNavigate();
     
@@ -25,6 +26,7 @@ export const Dashboard = () =>
             console.log(data);
             
             setName(data.name);
+            setIsAdmin(data.isAdmin);
         }
         catch (err)
         {
@@ -36,20 +38,35 @@ export const Dashboard = () =>
     useEffect(() =>
     {
         if (loading) return;
-        if (!user) return navigate("/Login");
+        if (!user) return navigate("/");
         fetchUserName();
     }, [user, loading]);
     
     return (
         <div className="dashboard">
+            
             <div className="dashboard__container">
-                Logged in as
-            <div>{name}</div>
-            <div>{user?.email}</div>
-            <button className="dashboard__btn" onClick={logout}>
-                Logout
-            </button>
-          </div>
+
+                {
+                isAdmin ? (
+                    <>
+                        Logged in as
+    
+                        <div>{name}</div>
+
+
+                        <div>{user?.email}</div>
+                        <button className="dashboard__btn" onClick={logout}>
+                            Logout
+                        </button>
+                    </>
+                )
+                :
+                (
+                    <div>Account not validated Admin</div>
+                )
+            }
+            </div>
         </div>
     );
 }
