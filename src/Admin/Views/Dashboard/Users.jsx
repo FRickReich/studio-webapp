@@ -2,11 +2,11 @@ import React from "react";
 
 import { Layout } from './../../Layout';
 
-export const Dashboard = ({ children, ...props }) =>
+export const Users = ({ children, ...props }) =>
 {
     return (
         <Layout>
-            Dashboard - Home
+            Dashboard - Users
         </Layout>
     )
 }
