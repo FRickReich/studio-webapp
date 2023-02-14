@@ -110,7 +110,7 @@ const logAnalyticsEvent = async (message = "default") =>
     }
     catch (err)
     {
-        console.log(err);
+        console.error(err);
         alert(err.message);
     }
 }

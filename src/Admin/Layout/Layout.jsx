@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, NavLink } from "react-router-dom";
 import { query, collection, getDocs, where } from "firebase/firestore";
@@ -7,10 +7,15 @@ import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 import { auth, db, logout } from "./../../firebase";
 
+import { UserContext } from "../../userContext";
+
 import './Layout.scss';
+import { UserContextProvider } from "../../userContext";
 
 export const Layout = ({ children, ...props }) =>
 {
+    const userData = useContext(UserContext);
+
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const [isAdmin, setIsAdmin ] = useState(false);
@@ -24,8 +29,6 @@ export const Layout = ({ children, ...props }) =>
             const q = query(collection(db, "users"), where("uid", "==", user?.uid));
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
-
-            console.log(data);
             
             setName(data.name);
             setIsAdmin(data.isAdmin);
@@ -43,6 +46,7 @@ export const Layout = ({ children, ...props }) =>
         if (!user) return navigate("/");
         fetchUserName();
     }, [user, loading]);
+
 
     return (
         <>

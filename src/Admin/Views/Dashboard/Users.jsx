@@ -1,12 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import { db } from "../../../firebase";
+import { collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 
 import { Layout } from './../../Layout';
 
 export const Users = ({ children, ...props }) =>
 {
-    return (
+    const [ users, setUsers ] = useState();
+
+    const collectionRef = collection(db, "users");
+
+   
+    useEffect(() =>
+    {
+        onSnapshot(collectionRef, snapshot => {
+            setUsers(snapshot.docs.map(doc => {
+
+                console.log(doc.data())
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                }
+            }));
+        });
+    }, []);
+    
+    const handleChangeRole = (id, originalData) => {
+        updateDoc(doc(db, "users", id), {
+            isAdmin: !originalData,
+            timestamp: serverTimestamp()
+        })
+    }
+
+    return(
         <Layout>
-            Dashboard - Users
+            <h1>Dashboard - Users</h1>
+
+            <ul>
+            {
+                    users && users.map((user, i) => {
+                        return(
+                            <li key={user.id}>
+                                <button
+                                    onClick={() => handleChangeRole(user.id, user.isAdmin) }
+                                >
+                                    { user.isAdmin ? "ADMIN" : "USER"}
+                                </button>&nbsp;
+                                { user.email } - { user.name && user.name }
+                            </li>
+                        )
+                    })
+                }
+            </ul>
         </Layout>
     )
 }
