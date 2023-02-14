@@ -1,51 +1,16 @@
-import { useAuthState } from "react-firebase-hooks/auth";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { auth } from "./firebase";
 
-import { auth, db, logout } from "./firebase";
+export const AuthContext = React.createContext();
 
-import { useNavigate, NavLink } from "react-router-dom";
+export const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+  
+    useEffect(() => {
+        auth.onAuthStateChanged(setUser);
+    }, []);
 
-import React, { createContext, useState, useEffect } from 'react';
-
-const UserContext = createContext();
-
-const UserContextProvider = ({ children }) =>
-{
-    const [user, loading, error] = useAuthState(auth);
-    const [ userData, setUserData ] = useState({});
-
-    const navigate = useNavigate();
-        
-    const fetchUserName = async () =>
-    {
-        try
-        {
-            const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-            const doc = await getDocs(q);
-            const data = doc.docs[0].data();
-            
-            setUserData(data);
-        }
-        catch (err)
-        {
-            console.error(err);
-            alert("An error occured while fetching user data");
-        }
-    };
-
-    useEffect(() =>
-    {
-        if (loading) return;
-        if (!userData) return navigate("/");
-        fetchUserName();
-    }, [userData, loading]);
-
-
-    return(
-        // <UserContext.Provider value={ userData }>
-            { children }
-        // </UserContext.Provider>
+    return (
+      <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
     );
-}
-
-export { UserContext, UserContextProvider };
+  };

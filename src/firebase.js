@@ -119,6 +119,8 @@ export {
     auth,
     db,
     analytics,
+    config,
+    app,
     getAnalytics,
     logAnalyticsEvent,
     signInWithGoogle,

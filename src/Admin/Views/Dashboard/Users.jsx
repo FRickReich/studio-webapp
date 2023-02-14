@@ -16,8 +16,6 @@ export const Users = ({ children, ...props }) =>
     {
         onSnapshot(collectionRef, snapshot => {
             setUsers(snapshot.docs.map(doc => {
-
-                console.log(doc.data())
                 return {
                     id: doc.id,
                     ...doc.data()

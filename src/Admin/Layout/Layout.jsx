@@ -1,28 +1,21 @@
-import React, { useEffect, useContext, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-import { query, collection, getDocs, where } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
-
 import { auth, db, logout } from "./../../firebase";
 
-import { UserContext } from "../../userContext";
+import { query, collection, getDocs, where } from "firebase/firestore";
 
-import './Layout.scss';
-import { UserContextProvider } from "../../userContext";
+
+import { AuthContext } from './../../userContext'
 
 export const Layout = ({ children, ...props }) =>
 {
-    const userData = useContext(UserContext);
-
-    const [user, loading, error] = useAuthState(auth);
-    const [name, setName] = useState("");
     const [isAdmin, setIsAdmin ] = useState(false);
-
+    const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-        
-    const fetchUserName = async () =>
+
+    const fetchRole = async () =>
     {
         try
         {
@@ -30,7 +23,6 @@ export const Layout = ({ children, ...props }) =>
             const doc = await getDocs(q);
             const data = doc.docs[0].data();
             
-            setName(data.name);
             setIsAdmin(data.isAdmin);
         }
         catch (err)
@@ -42,20 +34,19 @@ export const Layout = ({ children, ...props }) =>
 
     useEffect(() =>
     {
-        if (loading) return;
         if (!user) return navigate("/");
-        fetchUserName();
-    }, [user, loading]);
-
+        fetchRole();
+    }, [user]);
 
     return (
         <>
             {
-                isAdmin ?
+                isAdmin
+                ?
                 (
                     <>
                         <h1>Logged in as</h1>
-                        <div>{name}</div>
+                        <div>{user?.displayName}</div>
                         <div>{user?.email}</div>
 
                         <ul>
@@ -71,12 +62,15 @@ export const Layout = ({ children, ...props }) =>
                         </ul>
 
                         <hr />
-
                         { children }
                     </>
                 )
                 :
-                (<div>Account not validated by Admin</div>)
+                (
+                    <>
+                        <div>Account not validated by Admin</div>
+                    </>
+                )
             }
         </>
     )
