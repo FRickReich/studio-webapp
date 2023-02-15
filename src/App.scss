@@ -1,0 +1,12 @@
+@use './dashboard';
+
+.backlink
+{
+    cursor: pointer;
+    color: dashboard.$secondary;
+    
+    &:hover
+    {
+        color: dashboard.$primary;
+    }
+}

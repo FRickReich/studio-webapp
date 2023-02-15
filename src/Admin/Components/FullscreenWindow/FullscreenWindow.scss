@@ -1,0 +1,101 @@
+@use './../../../dashboard';
+
+.FullscreenWindow
+{
+    font-family: dashboard.$font-family;
+    font-weight: dashboard.$fontWeight-regular;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: dashboard.$lightgrey;
+
+    .box
+    {
+        min-width: 350px;
+        max-width: 450px;
+        border-radius: 6px;
+        box-shadow: 0 2px 2px rgb(204 197 185 / 50%);
+        background: dashboard.$light;
+        color: dashboard.$dark;
+        margin: 0 40px 20px 40px;
+        
+        .content
+        {
+            padding: 0.75em;
+
+            .meta
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 0.75em;
+
+                .icon
+                {
+                    margin-bottom: 5px;
+                    font-size: 6em;
+
+                    color: dashboard.$success;
+
+                    &.warning
+                    {
+                        color: dashboard.$warning;
+                    }
+
+                    &.error
+                    {
+                        color: dashboard.$error;
+                    }
+                }
+
+                .info
+                {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    max-height: 150px;
+                    min-height: 90px;
+
+                    .title
+                    {
+                        text-align: right;
+                        margin: 0;
+                        font-size: 1.5em;
+                        font-weight: dashboard.$fontWeight-medium;
+                    }
+
+                    .message
+                    {
+                        text-align: right;
+                        line-height: 1.25em;
+                        margin-top: 0.5em;
+                    }
+                }
+            }
+        }
+
+        .interaction
+        {
+            padding: 0;
+            line-height: 1.25em;
+            padding-top: 10px;
+            position: relative;
+            text-align: right;
+            border-top: 1px solid dashboard.$lightgrey;
+            display: flex;
+            justify-content: stretch;
+            gap: 10px;
+
+            .LinkButton
+            {
+                flex-basis: 100px;
+                flex-grow: 1;
+            }
+        }
+    }
+}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { db } from "../../../firebase";
+import { db } from "./../../firebase";
 import { collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 
-import { Layout } from './../../Layout';
+import { Layout } from './../Layout';
 
 export const Users = ({ children, ...props }) =>
 {

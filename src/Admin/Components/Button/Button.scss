@@ -1,0 +1,85 @@
+@use './../../../dashboard';
+
+.Button,
+.LinkButton
+{
+    align-items: center;
+    background: dashboard.$light;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    border-radius: .25rem;
+    box-sizing: border-box;
+    color: dashboard.$dark;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1em;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 2rem;
+    padding: 0.75rem 1.25rem;
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    vertical-align: baseline;
+    min-width: 100px;
+
+    &:hover,
+    &:focus
+    {
+        border-color: rgba(0, 0, 0, 0.15);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        color: dashboard.$dark;
+    }
+
+    &:hover
+    {
+        transform: translateY(-1px);
+    }
+
+    &:active
+    {
+        background: dashboard.$lightgrey;
+        border-color: rgba(0, 0, 0, 0.15);
+        box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+        color: rgba(0, 0, 0, 0.65);
+        transform: translateY(0);
+    }
+
+    &.primary
+    {
+        background: dashboard.$primary;
+        color: dashboard.$light;
+    }
+
+    &.secondary
+    {
+        background: dashboard.$secondary;
+        color: dashboard.$light;
+    }
+
+    &.success
+    {
+        background: dashboard.$success;
+        color: dashboard.$light;   
+    }
+
+    &.warning
+    {
+        background: dashboard.$warning;
+        color: dashboard.$dark;   
+    }
+
+    &.error
+    {
+
+        background: dashboard.$error;
+        color: dashboard.$light;   
+    }
+
+    .icon
+    {
+        margin: -1px 7px 0 0;
+    }
+}
