@@ -11,7 +11,7 @@
         flex-direction: row;
         justify-content: stretch;
 
-        padding-bottom: 0.5em;
+        padding-bottom: 0.5rem;
         border-bottom: 1px solid dashboard.$darkgrey;
 
         &:last-child
@@ -28,7 +28,7 @@
 
             .column
             {
-                height: 1em;
+                height: 1rem;
                 align-items: center;
             }
         }
@@ -61,7 +61,7 @@
             flex-grow: 0;
             padding: 10px 0 0 10px;
             flex-shrink: 1;
-            height: 3em;
+            height: 3rem;
             align-self: center;
             flex-basis: 50px;
             

@@ -13,7 +13,7 @@
     color: dashboard.$dark;
     cursor: pointer;
     display: inline-flex;
-    font-size: 1em;
+    font-size: 1rem;
     justify-content: center;
     line-height: dashboard.$line-height;
     margin: 0;
@@ -100,13 +100,13 @@
 .FloatingButton
 {
     position: absolute;
-    z-index: 1000;
+    z-index: 500;
     bottom: dashboard.$outer-padding;
     right: dashboard.$outer-padding;
     border-radius: 50%;
     min-width: inherit;
     padding: 0 !important;
-    height: 3em;
-    width: 3em;
+    height: 4rem;
+    width: 4rem;
     font-size: 1.5rem;
 }

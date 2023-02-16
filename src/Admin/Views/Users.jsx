@@ -33,7 +33,7 @@ export const Users = ({ children, ...props }) =>
     }
 
     return(
-        <Layout title="Users">
+        <Layout title="Benutzer">
 
             <Table/>
 

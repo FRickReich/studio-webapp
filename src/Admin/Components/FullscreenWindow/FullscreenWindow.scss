@@ -32,7 +32,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: flex-start;
-                gap: 1em;
+                gap: 1rem;
 
                 .icon
                 {
@@ -72,7 +72,7 @@
                     {
                         text-align: right;
                         line-height: dashboard.$line-height;
-                        margin-top: 0.5em;
+                        margin-top: 0.5rem;
                     }
                 }
             }
