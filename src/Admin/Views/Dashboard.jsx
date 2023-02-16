@@ -110,11 +110,61 @@ export const Dashboard = ({ children, ...props }) =>
                     <input type="submit" value="Speichern" />
                 </form> */}
 
-                <Form>
-                    <FormField label="Seitentitel"/>
-                    <FormField label="E-Mail"/>
-                    <FormField label="Beschreibung"/>
-                </Form>
+                {
+                    configs && configs.main &&
+                    (
+                        <>
+                            <h3>Allgemeines</h3>
+                            
+                            <Form>
+
+                                <FormField
+                                    label="Seitentitel"
+                                    value={ configs.main.title }
+                                    name="title"
+                                />
+                                <FormField
+                                    label="E-Mail"
+                                    value={ configs.main.email }
+                                    name="email"
+                                />
+                                <FormField
+                                    type="textarea"
+                                    resize="vertical"
+                                    label="Beschreibung"
+                                    value={ configs.main.description }
+                                    name="description"
+                                />
+                            </Form>
+
+                            <h3>Soziale Medien</h3>
+
+                            <Form>
+
+                                <FormField
+                                    label="facebook"
+                                    value={ configs.main.social.facebook }
+                                    name="title"
+                                />
+                                <FormField
+                                    label="tiktok"
+                                    value={ configs.main.social.tiktok }
+                                    name="email"
+                                />
+                                <FormField
+                                    label="instagram"
+                                    value={ configs.main.social.instagram }
+                                    name="email"
+                                />
+                                <FormField
+                                    label="whatsapp"
+                                    value={ configs.main.social.whatsapp }
+                                    name="email"
+                                />
+                            </Form>
+                        </>
+                    )
+                }
 
         </Layout>
     )
