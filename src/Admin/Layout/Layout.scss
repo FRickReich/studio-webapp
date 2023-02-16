@@ -24,6 +24,18 @@
                 cursor: pointer;
             }
         }
+
+        .link-list
+        {
+            display: flex;
+            flex-direction: column;
+            gap: dashboard.$padding;
+
+            @media only screen and (min-width: 768px)
+            {
+                flex-direction: row;
+            }
+        }
     }
 }
 

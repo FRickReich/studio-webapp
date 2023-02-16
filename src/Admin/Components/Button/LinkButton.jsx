@@ -5,12 +5,13 @@ import './Button.scss';
 
 export const LinkButton = ({ 
     children, 
-    path = "/", 
+    path, 
     primary, 
     secondary,
     transparent,
     success,
     warning,
+    fluid,
     error, 
     ...props
 }) =>
@@ -25,7 +26,8 @@ export const LinkButton = ({
                 ${ transparent ? 'transparent' : '' }
                 ${ success ? 'success' : '' }
                 ${ warning ? 'warning' : '' }
-                ${ error ? 'error' : '' }`
+                ${ error ? 'error' : '' }
+                ${ fluid ? 'fluid' : '' }`
             }
         >
             { children }

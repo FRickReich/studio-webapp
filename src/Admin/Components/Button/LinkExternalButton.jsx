@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import './Button.scss';
 
-export const FloatingButton = ({ 
+export const LinkExternalButton = ({ 
     children, 
     path, 
     primary, 
@@ -11,24 +10,28 @@ export const FloatingButton = ({
     transparent,
     success,
     warning,
+    fluid,
     error, 
     ...props
 }) =>
 {
     return (
-        <Link 
-            to={ path } 
+        <a 
+            href={`${ path }`}
+            target="_blank"
+            rel="noreferrer"
             className={
-                `FloatingButton 
+                `LinkButton 
                 ${ primary ? 'primary' : '' } 
                 ${ secondary ? 'secondary' : '' }
                 ${ transparent ? 'transparent' : '' }
-                ${ success ? 'success' : '' }W
+                ${ success ? 'success' : '' }
                 ${ warning ? 'warning' : '' }
-                ${ error ? 'error' : '' }`
+                ${ error ? 'error' : '' }
+                ${ fluid ? 'fluid' : '' }`
             }
         >
             { children }
-        </Link>
+        </a>
     )
 }

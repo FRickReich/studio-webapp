@@ -10,6 +10,7 @@ export const Button = ({
     success,
     warning,
     error,
+    fluid,
     onClick,
     ...props
 }) =>
@@ -23,7 +24,8 @@ export const Button = ({
                 ${ transparent ? 'transparent' : '' }
                 ${ success ? 'success' : '' }
                 ${ warning ? 'warning' : '' }
-                ${ error ? 'error' : '' }`
+                ${ error ? 'error' : '' }
+                ${ fluid ? 'fluid' : '' }`
             }
             onClick={ onClick }
         >
