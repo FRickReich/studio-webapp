@@ -2,10 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import MDEditor from '@uiw/react-md-editor';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFeather } from '@fortawesome/free-solid-svg-icons';
+
 import { db } from "./../../firebase";
 import { Layout } from './../Layout';
 
 import { AuthContext } from '../../userContext';
+import { FloatingButton } from "../Components";
+import { useNavigate } from "react-router";
 
 export const Blog = ({ children, ...props }) =>
 {
@@ -17,6 +22,8 @@ export const Blog = ({ children, ...props }) =>
     });
 
     const { user } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const recipesCollectionRef = collection(db, "blogs");
 
@@ -43,12 +50,16 @@ export const Blog = ({ children, ...props }) =>
         setForm({
             title: "",
             body: "",
-        }) 
+        });
+    }
+
+    const handleOpenEditor = () =>
+    {
+        
     }
 
     return (
-        <Layout>
-            Dashboard - Blog
+        <Layout title="Blog">
 
             <form onSubmit={ handleSubmit }>
                 <h2>New blog entry</h2>
@@ -71,10 +82,17 @@ export const Blog = ({ children, ...props }) =>
                 <button type="submit">Submit</button>
             </form>
 
-            <h2>All Entries</h2>
-
+            <h2>Bisherige Blogeinträge</h2>
             
-
+            <FloatingButton
+                primary
+                path="/dashboard/blog/create"
+            >
+                <FontAwesomeIcon
+                    className="icon"
+                    icon={faFeather}
+                />
+            </FloatingButton>
 
         </Layout>
     )

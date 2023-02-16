@@ -6,6 +6,7 @@ export const Button = ({
     children, 
     primary, 
     secondary,
+    transparent,
     success,
     warning,
     error,
@@ -19,6 +20,7 @@ export const Button = ({
                 `LinkButton 
                 ${ primary ? 'primary' : '' } 
                 ${ secondary ? 'secondary' : '' }
+                ${ transparent ? 'transparent' : '' }
                 ${ success ? 'success' : '' }
                 ${ warning ? 'warning' : '' }
                 ${ error ? 'error' : '' }`

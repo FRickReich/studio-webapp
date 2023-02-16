@@ -1,21 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightFromBracket, faHouse, faUsers, faBookOpen, faDisplay, faPortrait } from '@fortawesome/free-solid-svg-icons'
-import { db, logout } from "./../../firebase";
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { db } from "./../../firebase";
 
 import { query, collection, getDocs, where } from "firebase/firestore";
 
 import { AuthContext } from './../../userContext';
-import { Header, NotAuthorized } from "../Components/";
+import { FullscreenWindow, Header, LinkButton } from "../Components/";
 
 import './Layout.scss';
 
-export const Layout = ({ children, ...props }) =>
+export const Layout = ({ children, title, backlink, ...props }) =>
 {
     const [isAdmin, setIsAdmin ] = useState(false);
     const [isLoading, setIsLoading ] = useState(true);
     const { user } = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     const fetchRole = async () =>
@@ -43,12 +44,12 @@ export const Layout = ({ children, ...props }) =>
     }, [user]);
 
     return (
-        <>
+        <div className="Layout">
             {
                 isLoading ? 
                 (
                     <>
-                        <p>LOADING...</p>
+                       
                     </>
                 )
                 :
@@ -60,76 +61,43 @@ export const Layout = ({ children, ...props }) =>
                         (
                             <>
                                 <Header />
+
                                 <div className="content">
+                                    <h1 className="page-title">
+                                        {
+                                            backlink &&
+                                            <FontAwesomeIcon
+                                                onClick={ () => navigate(-1) }
+                                                className="go-back"
+                                                icon={faChevronLeft}
+                                            />
+                                        }
+                                        { title }
+                                    </h1>
                                     { children }
                                 </div>
                             </>
                         )
                         :
                         (
-                            <NotAuthorized />
+                            <FullscreenWindow
+                                type="error"
+                                title={ user?.email }
+                                message="Ist keine authorisierte E-Mail Adresse."
+                            >
+                                <LinkButton to="/">
+                                    <FontAwesomeIcon
+                                        className="icon"
+                                        icon={faChevronLeft}
+                                    />
+                                    Zurück
+                                </LinkButton>
+                            </FullscreenWindow>
                         )
                     }
                     </>
                 )
             }
-        </>
+        </div>
     )
 }
-
-// <h1>Logged in as</h1>
-// <div>{user?.displayName}</div>
-// <div>{user?.email}</div>
-
-{/* <NavLink to="/dashboard/">
-   <FontAwesomeIcon
-       icon={faHouse}
-   />
-</NavLink>
-
-<NavLink to="/dashboard/users">
-   <FontAwesomeIcon
-       icon={faUsers}
-   />
-</NavLink>
-
-<NavLink to="/dashboard/blog">
-   <FontAwesomeIcon
-       icon={faBookOpen}
-   />
-</NavLink>
-
-<NavLink to="/dashboard/pages">
-   <FontAwesomeIcon
-       icon={faDisplay}
-   />
-</NavLink>
-
-<NavLink to="/dashboard/artists">
-   <FontAwesomeIcon
-       icon={faPortrait}
-   />
-</NavLink>
-
-<button className="dashboard__btn" onClick={logout}>
-   <FontAwesomeIcon
-       icon={faArrowRightFromBracket}
-   />
-</button> */}
-
-// <ul>
-//     <li><NavLink to="/dashboard/">Home</NavLink></li>
-//     <li><NavLink to="/dashboard/users">Users</NavLink></li>
-//     <li><NavLink to="/dashboard/blog">Blog</NavLink></li>
-//     <li><NavLink to="/dashboard/">Pages</NavLink></li>
-//     <li><NavLink to="/dashboard/">Gallery</NavLink></li>
-//     <li>
-//         <button className="dashboard__btn" onClick={logout}>
-//             <FontAwesomeIcon
-//                 icon={faArrowRightFromBracket}
-//             />
-//         </button>
-//     </li>
-// </ul>
-
-// <hr />

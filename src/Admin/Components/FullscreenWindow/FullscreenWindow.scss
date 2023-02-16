@@ -10,22 +10,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     background: dashboard.$lightgrey;
 
     .box
     {
         min-width: 350px;
         max-width: 450px;
-        border-radius: 6px;
+        border-radius: dashboard.$border-radius;
         box-shadow: 0 2px 2px rgb(204 197 185 / 50%);
         background: dashboard.$light;
         color: dashboard.$dark;
-        margin: 0 40px 20px 40px;
+        margin: 0 calc(dashboard.$padding * 4) calc(dashboard.$padding * 2);
         
         .content
         {
-            padding: 0.75em;
+            padding: dashboard.$outer-padding;
 
             .meta
             {
@@ -33,11 +32,11 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: flex-start;
-                gap: 0.75em;
+                gap: 1em;
 
                 .icon
                 {
-                    margin-bottom: 5px;
+                    margin-bottom: 10px;
                     font-size: 6em;
 
                     color: dashboard.$success;
@@ -58,21 +57,21 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    max-height: 150px;
-                    min-height: 90px;
+                    max-height: 300px;
+                    min-height: 100px;
 
                     .title
                     {
                         text-align: right;
                         margin: 0;
-                        font-size: 1.5em;
+                        font-size: dashboard.$font-size-title;
                         font-weight: dashboard.$fontWeight-medium;
                     }
 
                     .message
                     {
                         text-align: right;
-                        line-height: 1.25em;
+                        line-height: dashboard.$line-height;
                         margin-top: 0.5em;
                     }
                 }
@@ -82,14 +81,12 @@
         .interaction
         {
             padding: 0;
-            line-height: 1.25em;
-            padding-top: 10px;
+            padding-top: dashboard.$padding;
             position: relative;
             text-align: right;
             border-top: 1px solid dashboard.$lightgrey;
             display: flex;
-            justify-content: stretch;
-            gap: 10px;
+            gap: calc(dashboard.$padding * 1.5);
 
             .LinkButton
             {

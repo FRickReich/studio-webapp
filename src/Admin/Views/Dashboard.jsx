@@ -5,8 +5,8 @@ import { Layout } from './../Layout';
 export const Dashboard = ({ children, ...props }) =>
 {
     return (
-        <Layout>
-            Dashboard - Home
+        <Layout title="Home">
+            content...
         </Layout>
     )
 }

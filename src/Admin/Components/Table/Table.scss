@@ -1,0 +1,92 @@
+@use './../../../dashboard';
+
+.Table
+{
+    display: flex;
+    flex-direction: column;
+
+    .row
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+
+        padding-bottom: 0.5em;
+        border-bottom: 1px solid dashboard.$darkgrey;
+
+        &:last-child
+        {
+            border-bottom: none;
+        }
+
+        &.heading
+        {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+            color: white;
+            padding-bottom: 10px;
+
+            .column
+            {
+                height: 1em;
+                align-items: center;
+            }
+        }
+
+        &:not(.heading) .column
+        {
+            &:first-child
+            {
+                padding-left: 0;
+            }
+
+            &:last-child
+            {
+                display: flex;
+                justify-content: stretch;
+
+
+                .LinkButton,
+                .Button
+                {
+                    
+                }
+            }
+        }
+        
+
+        .column
+        {
+            display: flex;
+            flex-grow: 0;
+            padding: 10px 0 0 10px;
+            flex-shrink: 1;
+            height: 3em;
+            align-self: center;
+            flex-basis: 50px;
+            
+            &.size1
+            {
+                flex-grow: 0;
+            }
+            &.size2
+            {
+                flex-grow: 2;
+            }
+            &.size3
+            {
+                flex-grow: 3;
+            }
+            &.size4
+            {
+                flex-grow: 4;
+            }
+
+            .LinkButton,
+            .Button
+            {
+                width: 110px;
+            }
+        }
+    }
+}

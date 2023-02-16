@@ -1,9 +1,30 @@
-.content
+@use './../../dashboard';
+
+.Layout
 {
-    margin-top: 10px;
+    background: dashboard.$lightgrey;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+ 
+    .content
+    {
+        padding: dashboard.$outer-padding;
+        flex-basis: 720px;
+        padding-top: calc(50px + 1em);
+
+        .page-title
+        {
+            margin-top: calc(dashboard.$padding / 2);
+            margin-bottom: dashboard.$padding;
+
+            .go-back
+            {
+                margin-right: calc(dashboard.$padding / 2);
+                cursor: pointer;
+            }
+        }
+    }
 }
 
-.active
-{
-    color: red;
-}
+

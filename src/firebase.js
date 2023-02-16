@@ -17,6 +17,7 @@ import {
     addDoc
 } from "firebase/firestore";
 import { getAnalytics, logEvent } from "firebase/analytics";
+import { Logger } from '@firebase/logger';
 
 const config = {
     apiKey: "AIzaSyBy2WnDSVZ2Yjuw_DEJOlQhumC-A8bhWtI",
@@ -28,6 +29,12 @@ const config = {
     measurementId: "G-5S53CEDTPT"
 };
 
+const logger = new Logger(`@firebase/<COMPONENT>`); 
+/* 
+    import { logger } from "./../../firebase"; 
+
+    logger.info("test");...
+*/
 
 const app = initializeApp(config);
 const auth = getAuth(app);
@@ -121,6 +128,7 @@ export {
     analytics,
     config,
     app,
+    logger,
     getAnalytics,
     logAnalyticsEvent,
     signInWithGoogle,

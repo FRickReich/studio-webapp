@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import './Button.scss';
 
-export const LinkButton = ({ 
+export const FloatingButton = ({ 
     children, 
-    path = "/", 
+    path, 
     primary, 
     secondary,
     transparent,
@@ -19,7 +19,7 @@ export const LinkButton = ({
         <Link 
             to={ path } 
             className={
-                `LinkButton 
+                `FloatingButton 
                 ${ primary ? 'primary' : '' } 
                 ${ secondary ? 'secondary' : '' }
                 ${ transparent ? 'transparent' : '' }

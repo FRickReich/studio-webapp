@@ -4,6 +4,7 @@ import { db } from "./../../firebase";
 import { collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 
 import { Layout } from './../Layout';
+import { Table } from "../Components";
 
 export const Users = ({ children, ...props }) =>
 {
@@ -32,25 +33,28 @@ export const Users = ({ children, ...props }) =>
     }
 
     return(
-        <Layout>
-            <h1>Dashboard - Users</h1>
+        <Layout title="Users">
 
-            <ul>
-            {
-                    users && users.map((user, i) => {
-                        return(
-                            <li key={user.id}>
-                                <button
-                                    onClick={() => handleChangeRole(user.id, user.isAdmin) }
-                                >
-                                    { user.isAdmin ? "ADMIN" : "USER"}
-                                </button>&nbsp;
-                                { user.email } - { user.name && user.name }
-                            </li>
-                        )
-                    })
-                }
-            </ul>
+            <Table/>
+
         </Layout>
     )
 }
+
+
+// <ul className="userlist">
+// {
+//         users && users.map((user, i) => {
+//             return(
+//                 <li key={user.id}>
+//                     <button
+//                         onClick={() => handleChangeRole(user.id, user.isAdmin) }
+//                     >
+//                         { user.isAdmin ? "ADMIN" : "USER"}
+//                     </button>&nbsp;
+//                     { user.email } - { user.name && user.name }
+//                 </li>
+//             )
+//         })
+//     }
+// </ul>
