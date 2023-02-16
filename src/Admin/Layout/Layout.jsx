@@ -85,7 +85,7 @@ export const Layout = ({ children, title, backlink, ...props }) =>
                                 title="Achtung!"
                                 message={`${ user?.email } Ist keine authorisierte E-Mail Adresse.`}
                             >
-                                <LinkButton to="/">
+                                <LinkButton path="/">
                                     <FontAwesomeIcon
                                         className="icon"
                                         icon={faChevronLeft}
