@@ -81,9 +81,9 @@ export const Layout = ({ children, title, backlink, ...props }) =>
                         :
                         (
                             <FullscreenWindow
-                                type="error"
-                                title={ user?.email }
-                                message="Ist keine authorisierte E-Mail Adresse."
+                                type="warning"
+                                title="Achtung!"
+                                message={`${ user?.email } Ist keine authorisierte E-Mail Adresse.`}
                             >
                                 <LinkButton to="/">
                                     <FontAwesomeIcon
