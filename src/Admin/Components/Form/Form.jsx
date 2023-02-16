@@ -3,7 +3,7 @@ import { Button } from "../Button/Button";
 
 import './Form.scss';
 
-export const Form = ({ children, ...props }) =>
+export const Form = ({ children, title, ...props }) =>
 {
     const handleClick = (e) =>
     {
@@ -18,6 +18,7 @@ export const Form = ({ children, ...props }) =>
         <form
             className="Form"
         >
+            <div className="heading">{ title }</div>
             { children }
 
             <Button success onClick={handleClick}>Speichern</Button>

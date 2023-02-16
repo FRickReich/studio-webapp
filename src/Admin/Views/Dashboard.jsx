@@ -114,9 +114,7 @@ export const Dashboard = ({ children, ...props }) =>
                     configs && configs.main &&
                     (
                         <>
-                            <h3>Allgemeines</h3>
-                            
-                            <Form>
+                            <Form title="Allgemeines">
 
                                 <FormField
                                     label="Seitentitel"
@@ -137,27 +135,26 @@ export const Dashboard = ({ children, ...props }) =>
                                 />
                             </Form>
 
-                            <h3>Soziale Medien</h3>
 
-                            <Form>
+                            <Form title="Soziale Medien">
 
                                 <FormField
-                                    label="facebook"
+                                    label="Facebook"
                                     value={ configs.main.social.facebook }
                                     name="title"
                                 />
                                 <FormField
-                                    label="tiktok"
+                                    label="TikTok"
                                     value={ configs.main.social.tiktok }
                                     name="email"
                                 />
                                 <FormField
-                                    label="instagram"
+                                    label="Instagram"
                                     value={ configs.main.social.instagram }
                                     name="email"
                                 />
                                 <FormField
-                                    label="whatsapp"
+                                    label="Whatsapp"
                                     value={ configs.main.social.whatsapp }
                                     name="email"
                                 />
