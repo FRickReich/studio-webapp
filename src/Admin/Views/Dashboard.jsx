@@ -55,6 +55,7 @@ export const Dashboard = ({ children, ...props }) =>
 
             <div className="link-list">
                 <LinkExternalButton
+                    secondary
                     path="https://console.firebase.google.com/u/1/project/tattoo-studio-1bf28/overview"
                     fluid
                 >
@@ -62,6 +63,7 @@ export const Dashboard = ({ children, ...props }) =>
                 </LinkExternalButton>
 
                 <LinkExternalButton
+                    secondary
                     path="https://console.firebase.google.com/u/1/project/tattoo-studio-1bf28/analytics/app/web:YmM0ZjRmNmMtNzBiMi00ODMxLWJlYmUtMjdlZDI5YTAxYmNl/streamview/~2F%3Ft%3D1676561471210&fpn%3D434152323259&swu%3D1&sgu%3D1&sus%3Dupgraded&cs%3Dapp.m.streamview.overview&g%3D1"
                     fluid
                 >
@@ -69,6 +71,7 @@ export const Dashboard = ({ children, ...props }) =>
                 </LinkExternalButton>
 
                 <LinkExternalButton
+                    secondary
                     path="https://console.firebase.google.com/u/1/project/tattoo-studio-1bf28/usage"
                     fluid
                 >
