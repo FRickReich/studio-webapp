@@ -2,23 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import './Form.scss';
 
-export const FormField = ({ children, value, label, type, state, resize, name, ...props }) =>
+export const FormField = ({ children, label, type, state, resize, name, ...props }) =>
 {
-    const [ val, setVal ] = useState("");
-
-    useEffect(() => 
-    {
-        if(value !== "")
-        {
-            setVal(value);
-        }
-    }, [value])
-
-    const handleChange = (e) =>
-    {
-        setVal(e.target.value);
-    }
-
     return (
         <div
             className="FormField"
@@ -34,14 +19,18 @@ export const FormField = ({ children, value, label, type, state, resize, name, .
                             resize === "vertical" ? 'resize-vertical' : 
                             resize === "horizontal" && 'resize-horizontal'
                         }`}
-                        onChange={handleChange}
-                        defaultValue={val}
+                        defaultValue={props.value}
+                        onChange={props.onChange}
                     >
                     </textarea>
                 )
                 :
                 (
-                    <input defaultValue={val} name={name} onChange={handleChange}/>
+                    <input
+                        name={name}
+                        defaultValue={props.value}
+                        onChange={props.onChange}
+                    />
                 )
             }
         </div>

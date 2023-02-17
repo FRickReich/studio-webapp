@@ -1,33 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./../../firebase";
-import { collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { query, collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 
 import { Layout } from './../Layout';
 
-import { Form, FormField, LinkExternalButton } from './../Components';
+import { Button, LinkExternalButton, FormField } from './../Components';
 
 export const Dashboard = ({ children, ...props }) =>
 {
-    const [ configs, setConfigs ] = useState();
+    const [ configs, setConfigs ] = useState({});
+    const [ savedForm, setSavedForm ] = useState({ main: false, social: false });
 
-    const collectionRef = collection(db, "configs");
-   
-    useEffect(() =>
-    {
-        onSnapshot(collectionRef, snapshot => {
-            setConfigs(...snapshot.docs.map(doc => {
-                return {
-                    [doc.data().name]: 
-                    {
-                        id: doc.id,
-                        ...doc.data()
-                    }
-                }
+    useEffect(() => {
+        onSnapshot(collection(db,"configs"), (snapshot) =>
+        {
+            const data = Object.fromEntries(snapshot.docs.map((doc, i) => {
+                return ([[doc.data().name], {
+                    id: doc.id,
+                    ...doc.data()
+                }])
             }));
 
-            console.log(configs);
+            setConfigs({ 
+                ...configs,
+                ...data
+            });
         });
     }, []);
+
+    const updateMainSettings = (e, id) =>
+    {
+        e.preventDefault();
+        setConfigs({...configs, [id]: { saved: true }});
+        setSavedForm({ ...savedForm, [id]: true })
+        updateDoc(doc(db, "configs", configs[id].id),
+        {
+            ...configs[id],
+            timestamp: serverTimestamp()
+        })
+    }
+
+    const changeValue = (e, id) =>
+    {
+        const newData = {[id]: { ...configs[id], saved: false, [e.target.name]: e.target.value }};
+
+        setSavedForm({ ...savedForm, [id]: false })
+        setConfigs({...configs, ...newData});
+    }
 
     return (
         <Layout title="Übersicht">
@@ -59,173 +78,74 @@ export const Dashboard = ({ children, ...props }) =>
 
             <h2>Einstellungen</h2>
 
-                {/* // configs && configs[0].main.email
-                // configs && configs.map((user, i) => {
-                //     console.log(user);
-                //     return(
-                //         <>
-                //             <p key={i}>{ user.main.email }</p>
-                //         </>
-                //     )
-                // })
-                */}
+            { 
+                configs?.main &&
+                (
+                    <form className={`Form ${ savedForm.main ? 'saved' : ''}`}  onSubmit={ (e) => updateMainSettings(e, "main") }>
+                        <div className="heading">Allgemein</div>
 
-                {/* {
-                    configs && configs?.main.email
-                } */}
+                        <FormField
+                            label="Seitentitel"
+                            value={ configs.main.title }
+                            onChange={(e) => changeValue(e, "main")}
+                            name="title"
+                        />
+                        <FormField
+                            label="E-Mail"
+                            value={ configs.main.email }
+                            onChange={(e) => changeValue(e, "main")}
+                            name="email"
+                        />
+                        <FormField
+                            type="textarea"
+                            resize="vertical"
+                            label="Beschreibung"
+                            value={ configs.main.description }
+                            onChange={(e) => changeValue(e, "main")}
+                            name="description"
+                        />
+                        
+                        <Button success>Speichern</Button>
+                    </form>
+                )
+            }
 
-                {/* <form action="">
+            {
+                configs?.social &&
+                (
+                    <form className={`Form ${ savedForm.social ? 'saved' : ''}`}  onSubmit={ (e) => updateMainSettings(e, "social") }>
+                        <div className="heading">Soziale Netzwerke</div>
 
-                    <h3>Allgemein</h3>
+                        <FormField
+                            label="Facebook"
+                            value={ configs.social.facebook }
+                            onChange={(e) => changeValue(e, "social")}
+                            name="facebook"
+                        />
+                        <FormField
+                            label="TikTok"
+                            value={ configs.social.tiktok }
+                            onChange={(e) => changeValue(e, "social")}
+                            name="tiktok"
+                        />
+                        <FormField
+                            label="Instagram"
+                            value={ configs.social.instagram }
+                            onChange={(e) => changeValue(e, "social")}
+                            name="instagram"
+                        />
+                        <FormField
+                            label="Whatsapp"
+                            value={ configs.social.whatsapp }
+                            onChange={(e) => changeValue(e, "social")}
+                            name="whatsapp"
+                        />
 
-                    <label htmlFor="pagetitle">Seitentitel</label>
-                    <input type="text" id="title"/>
-
-                    <br />
-
-                    <label htmlFor="contactmail">Kontaktemail</label>
-                    <input
-                        type="text" id="contactemail"
-                    />
-
-                    <br />
-
-                    <label htmlFor="description">Kontaktemail</label>
-                    <textarea name="description" id="description" cols="30" rows="5"></textarea>
-
-                    <h3>Social Links</h3>
-
-                    <label htmlFor="contactmail">Facebook</label>
-                    <input type="text" id="contactemail" />
-
-                    <label htmlFor="contactmail">Instagram</label>
-                    <input type="text" id="contactemail" />
-
-                    <label htmlFor="contactmail">TikTok</label>
-                    <input type="text" id="contactemail" />
-
-                    <label htmlFor="contactmail">Whatsapp</label>
-                    <input type="text" id="contactemail" />
-
-                    <input type="submit" value="Speichern" />
-                </form> */}
-
-                {
-                    configs && configs.main &&
-                    (
-                        <>
-                            <Form title="Allgemeines">
-
-                                <FormField
-                                    label="Seitentitel"
-                                    value={ configs.main.title }
-                                    name="title"
-                                />
-                                <FormField
-                                    label="E-Mail"
-                                    value={ configs.main.email }
-                                    name="email"
-                                />
-                                <FormField
-                                    type="textarea"
-                                    resize="vertical"
-                                    label="Beschreibung"
-                                    value={ configs.main.description }
-                                    name="description"
-                                />
-                            </Form>
-
-
-                            <Form title="Soziale Medien">
-
-                                <FormField
-                                    label="Facebook"
-                                    value={ configs.main.social.facebook }
-                                    name="title"
-                                />
-                                <FormField
-                                    label="TikTok"
-                                    value={ configs.main.social.tiktok }
-                                    name="email"
-                                />
-                                <FormField
-                                    label="Instagram"
-                                    value={ configs.main.social.instagram }
-                                    name="email"
-                                />
-                                <FormField
-                                    label="Whatsapp"
-                                    value={ configs.main.social.whatsapp }
-                                    name="email"
-                                />
-                            </Form>
-                        </>
-                    )
-                }
+                        <Button success>Speichern</Button>
+                    </form>
+                )
+            }
 
         </Layout>
     )
 }
-
-/*
-import React, { useState, useEffect } from "react";
-
-import { db } from "./../../firebase";
-import { collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serverTimestamp } from "firebase/firestore";
-
-import { Layout } from './../Layout';
-import { Table } from "../Components";
-
-export const Users = ({ children, ...props }) =>
-{
-    const [ users, setUsers ] = useState();
-
-    const collectionRef = collection(db, "users");
-
-   
-    useEffect(() =>
-    {
-        onSnapshot(collectionRef, snapshot => {
-            setUsers(snapshot.docs.map(doc => {
-                return {
-                    id: doc.id,
-                    ...doc.data()
-                }
-            }));
-        });
-    }, []);
-    
-    const handleChangeRole = (id, originalData) => {
-        updateDoc(doc(db, "users", id), {
-            isAdmin: !originalData,
-            timestamp: serverTimestamp()
-        })
-    }
-
-    return(
-        <Layout title="Benutzer">
-
-            <Table/>
-
-        </Layout>
-    )
-}
-
-
-// <ul className="userlist">
-// {
-//         users && users.map((user, i) => {
-//             return(
-//                 <li key={user.id}>
-//                     <button
-//                         onClick={() => handleChangeRole(user.id, user.isAdmin) }
-//                     >
-//                         { user.isAdmin ? "ADMIN" : "USER"}
-//                     </button>&nbsp;
-//                     { user.email } - { user.name && user.name }
-//                 </li>
-//             )
-//         })
-//     }
-// </ul>
-*/

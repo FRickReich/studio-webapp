@@ -33,3 +33,27 @@ $outer-padding: 1rem;
 $line-height: calc($padding * 2.5);
 
 $border-radius: 0.25rem;
+
+.form
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: calc($padding * 4);
+
+    .heading
+    {
+        margin-top: 3rem;
+        margin-bottom: 0;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    &:first-of-type
+    {
+        .heading
+        {
+            margin-top: 0;  
+        }
+    }
+}
