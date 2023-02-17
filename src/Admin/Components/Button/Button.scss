@@ -26,28 +26,6 @@
     vertical-align: baseline;
     min-width: 50px;
 
-    &:hover,
-    &:focus
-    {
-        border-color: rgba(0, 0, 0, 0.15);
-        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-        color: dashboard.$dark;
-    }
-
-    &:hover
-    {
-        transform: translateY(-1px);
-    }
-
-    &:active
-    {
-        background: dashboard.$lightgrey;
-        border-color: rgba(0, 0, 0, 0.15);
-        box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
-        color: rgba(0, 0, 0, 0.65);
-        transform: translateY(0);
-    }
-
     &.fluid
     {
         width: 100%;
@@ -74,25 +52,65 @@
     &.success
     {
         background: dashboard.$success;
-        color: dashboard.$light;   
+        color: dashboard.$light;
+
+        &:active,
+        &:hover
+        {
+            background: rgba(dashboard.$success, 0.75);
+            color: dashboard.$light;
+        }
     }
 
     &.warning
     {
         background: dashboard.$warning;
-        color: dashboard.$dark;   
+        color: dashboard.$dark;
+
+        &:active,
+        &:hover
+        {
+            background: rgba(dashboard.$warning, 0.75);
+            color: dashboard.$dark;
+        }
     }
 
     &.error
     {
-
         background: dashboard.$error;
-        color: dashboard.$light;   
+        color: dashboard.$light;
+
+        &:active,
+        &:hover
+        {
+            background: rgba(dashboard.$error, 0.75);
+            color: dashboard.$light;
+        }
     }
 
     .icon
     {
         margin: -1px 7px 0 0;
+    }
+
+    &:hover,
+    &:focus
+    {
+        border-color: rgba(0, 0, 0, 0.15);
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    }
+
+    &:hover
+    {
+        transform: translateY(-1px);
+    }
+
+    &:active
+    {
+        background: rgba(dashboard.$secondary, 0.5);
+        border-color: rgba(0, 0, 0, 0.15);
+        box-shadow: rgba(0, 0, 0, 0.05) 0 2px 4px;
+        transform: translateY(0);
     }
 
 }
