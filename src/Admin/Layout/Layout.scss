@@ -13,6 +13,17 @@
         flex-basis: 720px;
         padding-top: calc(50px + 1rem);
 
+        h2
+        {
+            padding-bottom: 5px;
+            border-bottom: 2px solid dashboard.$dark;
+
+            &:not(:first-of-type)
+            {
+                margin-top: 100px;
+            }
+        }
+
         .page-title
         {
             margin-top: calc(dashboard.$padding / 2);
