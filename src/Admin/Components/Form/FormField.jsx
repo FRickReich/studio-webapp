@@ -6,7 +6,7 @@ export const FormField = ({ children, label, type, state, resize, name, ...props
 {
     return (
         <div
-            className="FormField"
+            className={`FormField ${ type ===  "textarea" ? 'textareaField' : '' }`}
         >
             <label>{ label }</label>
             {

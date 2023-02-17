@@ -54,13 +54,36 @@
         border-radius: dashboard.$border-radius;
         margin: 0;
 
+        &.textareaField
+        {
+            flex-direction: column;
+
+            label
+            {
+                flex-basis: 10px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+                border-right: none;
+            }
+            
+            @media only screen and (min-width: 768px)
+            {            
+                flex-direction: row;
+
+                label
+                {
+                    flex-basis: 200px;
+                    border-right: 1px solid rgba(0, 0, 0, 0.075);
+                }
+            }
+        }
+
         label
         {
             flex-basis: 150px;
             font-size: 1rem;
             padding: 0.75rem 0 0.75rem 0.75rem;
             border-right: 1px solid rgba(0, 0, 0, 0.075);
-
+            
             @media only screen and (min-width: 768px)
             {            
                 flex-basis: 200px;
