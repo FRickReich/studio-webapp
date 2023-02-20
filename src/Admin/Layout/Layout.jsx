@@ -39,6 +39,8 @@ export const Layout = ({ children, title, backlink, ...props }) =>
 
     useEffect(() =>
     {
+        document.title = `Dashboard - ${ title }`
+
         if (!user) return navigate("/");
         fetchRole();
     }, [user]);

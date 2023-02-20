@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
 import {
     GoogleAuthProvider,
     getAuth,
@@ -40,6 +41,7 @@ const app = initializeApp(config);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const analytics = getAnalytics(app);
+const storage = getStorage(app);
 
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
@@ -129,7 +131,9 @@ export {
     config,
     app,
     logger,
+    storage,
     getAnalytics,
+    getStorage,
     logAnalyticsEvent,
     signInWithGoogle,
     logInWithEmailAndPassword,

@@ -29,11 +29,11 @@ export const Header = ({ children, ...props }) =>
             </div>
             <div className={`menu ${ isOpen ? 'open' : 'closed'}`}>
                 <nav className={`items ${ isOpen ? 'open' : 'closed' }`}>
-                    <NavLink to="/dashboard/" className="link">Home</NavLink>
-                    <NavLink to="/dashboard/users" className="link">Users</NavLink>
+                    <NavLink to="/dashboard/" className="link">Startseite</NavLink>
+                    <NavLink to="/dashboard/users" className="link">Benutzer</NavLink>
                     <NavLink to="/dashboard/blog" className="link">Blog</NavLink>
-                    <NavLink to="/dashboard/pages" className="link">Pages</NavLink>
-                    <NavLink to="/dashboard/gallery" className="link">Gallery</NavLink>
+                    <NavLink to="/dashboard/pages" className="link">Seiten</NavLink>
+                    <NavLink to="/dashboard/images" className="link">Bilder</NavLink>
                 </nav>
                 <nav className={`items ${ isOpen ? 'open' : 'closed' }`}>
                     <div className="link" onClick={logout}>

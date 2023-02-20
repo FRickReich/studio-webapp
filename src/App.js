@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import {  
-    Dashboard, Users, Blog, Login, NotFound, BlogEditor
+    Dashboard, Users, Blog, Login, NotFound, BlogEditor, Images
 } from './Admin/Views';
 
 import { Home } from './Web/Views';
@@ -21,6 +21,7 @@ function App() {
                         <Route exact path="/dashboard/users/" element={<Users />} />
                         <Route exact path="/dashboard/blog/" element={<Blog />} />
                         <Route exact path="/dashboard/blog/create" element={<BlogEditor />} />
+                        <Route exact path="/dashboard/images/" element={<Images />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Router>
