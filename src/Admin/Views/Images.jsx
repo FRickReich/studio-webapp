@@ -78,8 +78,8 @@ export const Images = ({ children, ...props }) => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     console.log(url);
 
-                    setFile()
-                    setPreviewURL("");
+                    setFile();
+                    setPreviewURL();
                     setPercent(0)
                     setFiles(oldFiles => [{
                         url, 
@@ -104,6 +104,10 @@ export const Images = ({ children, ...props }) => {
         if (file) {
           setPreviewURL(URL.createObjectURL(file));
         }
+        else if(!file)
+        {
+            setPreviewURL();
+        }
       }, [file]);
 
 
@@ -113,7 +117,10 @@ export const Images = ({ children, ...props }) => {
             <h3>Bild Hochladen</h3>
 
             <div className="ImageUploader">
-                <img className="image-preview" src={previewURL} alt="" />
+                {
+                    previewURL &&
+                    <img className="image-preview" src={previewURL} alt="" />
+                }
 
                 <div className="upload-bar">
                     <div className="upload-inner-bar" style={{ width: percent + "%" }}></div>
