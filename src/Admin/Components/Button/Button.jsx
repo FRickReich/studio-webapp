@@ -11,12 +11,14 @@ export const Button = ({
     warning,
     error,
     fluid,
+    disabled,
     onClick,
     ...props
 }) =>
 {
     return (
         <button 
+            disabled={disabled}
             className={
                 `LinkButton 
                 ${ primary ? 'primary' : '' } 

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import { Layout } from './../Layout';
+import { Button } from "../Components";
 
 export const Images = ({ children, ...props }) => {
 
@@ -77,6 +78,7 @@ export const Images = ({ children, ...props }) => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     console.log(url);
 
+                    setFile()
                     setPreviewURL("");
                     setPercent(0)
                     setFiles(oldFiles => [{
@@ -108,7 +110,9 @@ export const Images = ({ children, ...props }) => {
     return (
         <Layout title="Bilder">
 
-            <div>
+            <h3>Bild Hochladen</h3>
+
+            <div className="ImageUploader">
                 <img className="image-preview" src={previewURL} alt="" />
 
                 <div className="upload-bar">
@@ -116,8 +120,12 @@ export const Images = ({ children, ...props }) => {
                 </div>
    
                 <input className="Button" type="file" onChange={handleChange} ref={hiddenFileInput} accept="/image/*" style={{ display: "none" }}/>
-                <button className="Button" onClick={handleUploadButtonClick}>Datei Auswählen</button>
-                <button className="Button" onClick={handleUpload}>Hochladen</button>
+
+                <div className="interaction">
+                    <Button onClick={handleUploadButtonClick}>Datei Auswählen</Button>
+                    <Button success onClick={handleUpload} disabled={!file}>Hochladen</Button>
+                </div>
+
             </div>
 
             <h3>Gallerie</h3>

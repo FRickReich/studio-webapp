@@ -49,27 +49,48 @@
             }
         }
 
-        .image-preview
+        .ImageUploader
         {
-            width: 100%;
-        }
-
-        .upload-bar
-        {
-            box-sizing: border-box;
-            border: 1px solid dashboard.$dark;
-            width: 100%;
-            border-radius: 5px;
-            overflow: hidden;
-            height: 1rem;
-
-            .upload-inner-bar
+            .image-preview
             {
-                height: 100%;
-                width: 90%;
-                background: dashboard.$secondary;
+                width: 100%;
             }
+    
+            .upload-bar
+            {
+                box-sizing: border-box;
+                border: 1px solid dashboard.$dark;
+                width: 100%;
+                border-radius: 5px;
+                overflow: hidden;
+                height: 1rem;
+    
+                .upload-inner-bar
+                {
+                    height: 100%;
+                    width: 90%;
+                    background: dashboard.$secondary;
+                }
+            }
+            
+            .interaction
+            {
+                padding: 0;
+                padding-top: dashboard.$padding;
+                position: relative;
+                text-align: right;
+                border-top: 1px solid dashboard.$lightgrey;
+                display: flex;
+                gap: calc(dashboard.$padding * 1.5);
+    
+                .LinkButton
+                {
+                    flex-basis: 100px;
+                    flex-grow: 1;
+                }
+            }   
         }
+
 
         .image-list
         {

@@ -127,6 +127,21 @@
         transform: translateY(1px);
     }
 
+    &:disabled
+    {
+        background: dashboard.$darkgrey;
+        color: dashboard.$lightgrey;
+
+        &:hover
+        {
+            box-shadow: none;
+            background: dashboard.$darkgrey;
+            color: dashboard.$lightgrey;
+            cursor: auto;
+            transform: translateY(0);
+        }
+    }
+
 }
 
 .FloatingButton
