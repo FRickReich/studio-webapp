@@ -62,7 +62,7 @@ export const Layout = ({ children, title, backlink, ...props }) =>
                         ?
                         (
                             <>
-                                <Header />
+                                <Header user={user.email} />
 
                                 <div className="content">
                                     <h1 className="page-title">

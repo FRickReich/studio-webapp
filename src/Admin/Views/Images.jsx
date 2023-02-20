@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ref, uploadBytesResumable, getDownloadURL, getStorage, listAll, deleteObject } from "firebase/storage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { Layout } from './../Layout';
 import { Button } from "../Components";
@@ -11,13 +11,13 @@ export const Images = ({ children, ...props }) => {
     const [file, setFile] = useState();
     const [files, setFiles] = useState([]);
     const [previewURL, setPreviewURL] = useState();
+    const [activeImage , setActiveImage] = useState();
 
     const hiddenFileInput = useRef(null);
 
     const storage = getStorage();
     const storageRef = ref(storage, "images");
 
-    // progress
     const [percent, setPercent] = useState(0);
 
     useEffect(() => {
@@ -25,6 +25,16 @@ export const Images = ({ children, ...props }) => {
 
         getFiles()
     }, []);
+
+    useEffect(() => {
+        if (file) {
+          setPreviewURL(URL.createObjectURL(file));
+        }
+        else if(!file)
+        {
+            setPreviewURL();
+        }
+      }, [file]);
 
     const getFiles = async () =>
     {
@@ -74,7 +84,6 @@ export const Images = ({ children, ...props }) => {
             },
             (err) => console.log(err),
             () => {
-                // getFiles();
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     console.log(url);
 
@@ -91,25 +100,18 @@ export const Images = ({ children, ...props }) => {
     };
 
     const handleChange = (event) => {
-        // console.log(event.target.files[0]);
         setFile(event.target.files[0]);
+    }
+
+    const closePreview = () =>
+    {
+        setActiveImage()   
     }
 
     const handleUploadButtonClick = () =>
     {
         hiddenFileInput.current.click();
     }
-
-    useEffect(() => {
-        if (file) {
-          setPreviewURL(URL.createObjectURL(file));
-        }
-        else if(!file)
-        {
-            setPreviewURL();
-        }
-      }, [file]);
-
 
     return (
         <Layout title="Bilder">
@@ -144,20 +146,46 @@ export const Images = ({ children, ...props }) => {
                     {
                         return(
                             <li key={i} className="image-list-item">
-                                <img
-                                    src={file.url}
-                                    alt=""
-                                />
+                                <div 
+                                    className="list-image"
+                                    onClick={() => setActiveImage(file.url)}
+                                    style={{
+                                        backgroundImage: `url(${file.url})`,
+                                        backgroundPosition: 'center center',
+                                        backgroundSize: "cover",
+                                        backgroundRepeat: 'no-repeat'
+                                    }}
+                                ></div>
                                 <FontAwesomeIcon
                                     onClick={() => deleteFile(file.path)}
                                     className="icon"
-                                    icon={faXmark}
+                                    icon={faTrash}
                                 />
                             </li>
                         )
                     })
                 }
                 </ul>
+            }
+
+            {
+                activeImage &&
+                (
+                    <div className="preview-zoom">
+                        <div className="image" style={{ 
+                            backgroundImage: `url(${ activeImage })`,
+                            backgroundPosition: 'center center',
+                            backgroundSize: '100%',
+                            backgroundRepeat: 'no-repeat'
+                            }}>
+                                <FontAwesomeIcon
+                                    onClick={() => closePreview()}
+                                    className="cancel"
+                                    icon={faXmark}
+                                />
+                            </div>
+                    </div>
+                )
             }
 
         </Layout>

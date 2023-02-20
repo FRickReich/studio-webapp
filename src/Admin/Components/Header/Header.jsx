@@ -7,7 +7,7 @@ import { logout } from "./../../../firebase";
 
 import './Header.scss';
 
-export const Header = ({ children, ...props }) =>
+export const Header = ({ children, user, ...props }) =>
 {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -19,7 +19,7 @@ export const Header = ({ children, ...props }) =>
     return (
         <div className="Header">
             <div className="bar">
-            <Link to="/dashboard/" className="brand">Dashboard</Link>
+            <Link to="/dashboard/" className="brand">Dashboard { user && ` - ${user}`}</Link>
                 <div className="toggle" onClick={ handleOpen }>
                     <FontAwesomeIcon
                         className="icon"
