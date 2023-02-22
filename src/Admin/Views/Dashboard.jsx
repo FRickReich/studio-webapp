@@ -4,7 +4,8 @@ import { query, collection, onSnapshot, doc, addDoc, deleteDoc, updateDoc, serve
 
 import { Layout } from './../Layout';
 
-import { Button, LinkExternalButton, FormField } from './../Components';
+import { Button, LinkExternalButton, FormField, Section } from './../Components';
+import { SectionArea } from "../Components/Section/SectionArea";
 
 export const Dashboard = ({ children, ...props }) =>
 {
@@ -51,6 +52,39 @@ export const Dashboard = ({ children, ...props }) =>
     return (
         <Layout title="Übersicht">
             
+            <Section title="Hello Section">
+                <SectionArea title="Section 1">
+                    Hallo Welt
+                </SectionArea>
+            </Section>
+
+            <Section title="Hello Section" collapsable={false}>
+                <SectionArea title="Section 1">
+                    Hallo Welt
+                </SectionArea>
+                <SectionArea>
+                    Hallo Welt
+                </SectionArea>
+                <SectionArea title="Section 3">
+                    Hallo Welt
+                </SectionArea>
+            </Section>
+
+            <Section title="Hello Section" box={false} collapsable={true}>
+                <SectionArea title="Section 1">
+                    Hallo Welt
+                </SectionArea>
+                <SectionArea title="Section 2">
+                    Hallo Welt
+                </SectionArea>
+            </Section>
+
+            <Section title="Hello Section">
+                <SectionArea title="Section 1">
+                    Hallo Welt
+                </SectionArea>
+            </Section>
+
             <h2>Wichtige Links</h2>
 
             <div className="link-list">

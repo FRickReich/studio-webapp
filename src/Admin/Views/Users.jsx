@@ -35,7 +35,25 @@ export const Users = ({ children, ...props }) =>
     return(
         <Layout title="Benutzer">
 
-            <Table/>
+            {/* <Table/> */}
+
+            <ul className="userlist">
+            {
+                users && users.map((user, i) =>
+                {
+                    return(
+                        <li key={user.id}>
+                            <button
+                                onClick={() => handleChangeRole(user.id, user.isAdmin) }
+                            >
+                                { user.isAdmin ? "ADMIN" : "USER"}
+                            </button>&nbsp;
+                            { user.email } - { user.name && user.name }
+                        </li>
+                    )
+                })
+            }
+            </ul>
 
         </Layout>
     )

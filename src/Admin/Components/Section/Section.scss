@@ -1,0 +1,157 @@
+@use './../../../dashboard';
+
+.Section
+{
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+
+    .Section-wrapper
+    {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .Section-header
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .Section-header-title
+            {
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 500;
+                margin: 0;
+                color: dashboard.$font-color;
+            }
+
+            .Section-header-icon
+            {
+                user-select: none;
+                color: dashboard.$font-color;
+                cursor: pointer;
+                font-size: 24px;
+            }
+        }
+        .Section-content
+        {
+            align-items: stretch;
+            clear: right;
+            display: flex;
+            flex-wrap: wrap;
+
+            &.box
+            {
+                .Section-Card
+                {
+                    margin: 0;
+
+                    .Section-Card-inner
+                    {
+                        box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+                        background: white;
+                        padding: 16px 0;
+                        border-radius: 8px;
+
+                        .Section-Area
+                        {
+                            padding: 0 dashboard.$outer-padding;
+                        }
+                    }
+                }
+            }
+
+            .Section-Card
+            {
+                flex-grow: 1;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                margin: -14px -4px;
+
+                .Section-Card-inner
+                {
+
+                    color: dashboard.$darkgrey;
+                    box-sizing: border-box;
+                    flex-grow: 1;
+                    font-size: 12px;
+                    height: 100%;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 16px 4px;
+
+                    .Section-Area
+                    {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                        border-bottom: 1px solid lightgrey;
+
+                        &:last-of-type
+                        {
+                            border-bottom: none;
+                            margin-bottom: 0;
+
+                            .Section-Area-content
+                            {
+                                padding-bottom: dashboard.$outer-padding;
+                            }
+                        }
+
+                        .Section-Area-title
+                        {
+                            font-size: 14px;
+                            font-weight: 500;
+                            margin: 0;
+                        }
+
+                        .Section-Area-content
+                        {
+                            margin: 0;
+                            padding-top: 32px;
+                            padding-bottom: 32px;
+                        }
+                    }
+                }
+            }
+
+            &.content-open .Section-card
+            {
+                min-height: 200px;
+            }
+
+            &.content-hide
+            {
+                overflow: hidden;
+                
+                .Section-Card
+                {
+                    height: 0px;
+                }
+                
+            }
+        }
+    }
+}
+
+
+//                     h3
+//                     {
+//                         font-size: 14px;
+//                         font-weight: 500;
+//                         line-height: 20px;
+//                         margin: 0;
+//                         // padding-left: 8px;
+//                         display: block;
+//                         color: dashboard.$darkgrey;
+//                     }
+//                 }
+
+//             }
+//         }
+//     }
+// }

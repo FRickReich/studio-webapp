@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { Layout } from './../Layout';
-import { Button } from "../Components";
+import { Button, Section } from "../Components";
 
 export const Images = ({ children, ...props }) => {
 
@@ -116,57 +116,61 @@ export const Images = ({ children, ...props }) => {
     return (
         <Layout title="Bilder">
 
-            <h3>Bild Hochladen</h3>
-
-            <div className="ImageUploader">
-                {
-                    previewURL &&
-                    <img className="image-preview" src={previewURL} alt="" />
-                }
-
-                <div className="upload-bar">
-                    <div className="upload-inner-bar" style={{ width: percent + "%" }}></div>
-                </div>
-   
-                <input className="Button" type="file" onChange={handleChange} ref={hiddenFileInput} accept="/image/*" style={{ display: "none" }}/>
-
-                <div className="interaction">
-                    <Button onClick={handleUploadButtonClick}>Datei Auswählen</Button>
-                    <Button success onClick={handleUpload} disabled={!file}>Hochladen</Button>
-                </div>
-
-            </div>
-
-            <h3>Gallerie</h3>
-
-            {
-                <ul className="image-list">
-                {
-                    files.map((file, i) =>
+            <Section title="Bild Hochladen">
+                <div className="ImageUploader">
                     {
-                        return(
-                            <li key={i} className="image-list-item">
-                                <div 
-                                    className="list-image"
-                                    onClick={() => setActiveImage(file.url)}
-                                    style={{
-                                        backgroundImage: `url(${file.url})`,
-                                        backgroundPosition: 'center center',
-                                        backgroundSize: "cover",
-                                        backgroundRepeat: 'no-repeat'
-                                    }}
-                                ></div>
-                                <FontAwesomeIcon
-                                    onClick={() => deleteFile(file.path)}
-                                    className="icon"
-                                    icon={faTrash}
-                                />
-                            </li>
-                        )
-                    })
+                        previewURL &&
+                        <img className="image-preview" src={previewURL} alt="" />
+                    }
+
+                    <div className="upload-bar">
+                        <div className="upload-inner-bar" style={{ width: percent + "%" }}></div>
+                    </div>
+
+                    <input className="Button" type="file" onChange={handleChange} ref={hiddenFileInput} accept="/image/*" style={{ display: "none" }}/>
+
+                    <div className="interaction">
+                        <Button onClick={handleUploadButtonClick}>Datei Auswählen</Button>
+                        <Button success onClick={handleUpload} disabled={!file}>Hochladen</Button>
+                    </div>
+
+                </div>
+            </Section>
+
+            <Section
+                title="Verfügbare Bilder"
+                collapsable={false} 
+                box={false}
+            >
+                {
+                    <ul className="image-list">
+                    {
+                        files.map((file, i) =>
+                        {
+                            return(
+                                <li key={i} className="image-list-item">
+                                    <div 
+                                        className="list-image"
+                                        onClick={() => setActiveImage(file.url)}
+                                        style={{
+                                            backgroundImage: `url(${file.url})`,
+                                            backgroundPosition: 'center center',
+                                            backgroundSize: "cover",
+                                            backgroundRepeat: 'no-repeat'
+                                        }}
+                                    ></div>
+                                    <FontAwesomeIcon
+                                        onClick={() => deleteFile(file.path)}
+                                        className="icon"
+                                        icon={faTrash}
+                                    />
+                                </li>
+                            )
+                        })
+                    }
+                    </ul>
                 }
-                </ul>
-            }
+            </Section>
 
             {
                 activeImage &&

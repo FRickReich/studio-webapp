@@ -6,3 +6,4 @@ export { LinkExternalButton } from './Button/LinkExternalButton';
 export { FloatingButton } from './Button/FloatingButton';
 export { Table } from './Table/Table';
 export { FormField } from '../Components/Form/FormField';
+export { Section } from './Section/Section';

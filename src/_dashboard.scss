@@ -1,9 +1,10 @@
-$light: #F5F1F2;
+$light: #FFFFFF;
 $dark: #1A1619;
 $secondary: #0990B9;
 $primary: #0C425F;
-$darkgrey: #B0AEB7;
-$lightgrey: #E8DED5;
+$darkgrey: rgba(0,0,0,0.55);
+$lightgrey: #f6f7f9;
+$font-color: #476282;
 
 $link-inactive: #17617F;
 
@@ -52,7 +53,7 @@ $border-radius: 0.25rem;
     &:first-of-type
     {
         .heading
-        {
+        { 
             margin-top: 0;  
         }
     }
